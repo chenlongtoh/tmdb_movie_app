@@ -5,7 +5,7 @@ import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/service/movie_service.dart';
 import 'package:movie_app/shared_widgets/ui_lib/cached_movie_image.dart';
 import 'package:movie_app/shared_widgets/ui_lib/spacer.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:movie_app/theme/text_style.dart';
 
 const double _kDefaultAspectRatio = 16 / 9;
 
@@ -40,6 +40,22 @@ class _TrailerPreviewCarouselState extends State<TrailerPreviewCarousel> with Ti
 
   void _onCarouselPageChanged(nextIndex, reason) => setState(() => _index = nextIndex);
 
+  List<Widget> get buildLoading => [
+        const AspectRatio(
+          aspectRatio: _kDefaultAspectRatio,
+          child: Center(child: CircularProgressIndicator()),
+        )
+      ];
+
+  List<Widget> get buildEmpty => [
+        const AspectRatio(
+          aspectRatio: _kDefaultAspectRatio,
+          child: Center(
+            child: Text("No Movies Found"),
+          ),
+        ),
+      ];
+
   List<Widget> get buildContentCarousel {
     assert(_movies?[_index] != null);
     final Movie movie = _movies![_index];
@@ -72,14 +88,21 @@ class _TrailerPreviewCarouselState extends State<TrailerPreviewCarousel> with Ti
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(movie.originalTitle ?? "N/A"),
+                  verticalSpacer5,
+                  Text(
+                    movie.originalTitle ?? "N/A",
+                    maxLines: 2,
+                    style: MovieAppTextStyle.bold14,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   verticalSpacer10,
                   Text(
                     movie.overview ?? "N/A",
-                    maxLines: 3,
+                    maxLines: 5,
                     overflow: TextOverflow.ellipsis,
+                    style: MovieAppTextStyle.regular10,
                   ),
                 ],
               ),
@@ -93,7 +116,11 @@ class _TrailerPreviewCarouselState extends State<TrailerPreviewCarousel> with Ti
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: (isLoading || isEmpty) ? [Text("Empty")] : buildContentCarousel,
+      children: isLoading
+          ? buildLoading
+          : isEmpty
+              ? buildEmpty
+              : buildContentCarousel,
     );
   }
 }
