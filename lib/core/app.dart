@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/home/home_page.dart';
-import 'package:movie_app/core/search/search_page.dart';
+import 'package:movie_app/core/view/screens/home_page.dart';
+import 'package:movie_app/core/view/screens/search_page.dart';
 
 const List<Widget> _kScreens = [HomePage(), SearchPage()];
 
