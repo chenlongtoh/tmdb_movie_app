@@ -32,10 +32,6 @@ class _AppState extends State<App> {
         onTap: _onTap,
         currentIndex: _index,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedIconTheme: const IconThemeData(size: 30),
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
         enableFeedback: true,
         showUnselectedLabels: true,
         items: const [
