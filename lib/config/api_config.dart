@@ -4,6 +4,8 @@ class ApiConfig {
   static const String posterImageResolution = "w154";
   static const String backdropImageResolution = "original";
 
-  static String get posterBaseUrl => "$imageResourceBaseUrl/$posterImageResolution";
-  static String get backdropBaseUrl => "$imageResourceBaseUrl/$backdropImageResolution";
+  static const String posterBaseUrl = "$imageResourceBaseUrl/$posterImageResolution";
+  static const String backdropBaseUrl = "$imageResourceBaseUrl/$backdropImageResolution";
+
+  static const int apiResultPageSize = 20;
 }

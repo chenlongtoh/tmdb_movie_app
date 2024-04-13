@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/http/http_service.dart';
-import 'package:movie_app/shared/theme/theme.dart';
+import 'package:movie_app/theme/theme.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
