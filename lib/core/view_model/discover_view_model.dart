@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/model/entity/discover_response.dart';
+import 'package:movie_app/core/model/entity/pageable_movie_response.dart';
 import 'package:movie_app/core/model/entity/genre.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/service/discover_service.dart';
@@ -15,7 +15,7 @@ enum LoadState {
 
 class DiscoverViewModel extends ChangeNotifier {
   LoadState loadState = LoadState.initializing;
-  Map<Genre, DiscoverMovieResponse> genreMovieCache = {};
+  Map<Genre, PageableMovieResponse> genreMovieCache = {};
   List<Genre> genreList = [];
 
   Genre? selectedGenre;

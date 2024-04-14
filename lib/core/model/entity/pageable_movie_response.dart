@@ -1,17 +1,19 @@
 import 'package:movie_app/core/model/entity/movie.dart';
 
-class MovieResponse {
+class PageableMovieResponse {
   int? page;
   List<Movie>? movies;
   int? totalPages;
   int? totalResults;
 
-  MovieResponse.fromJson(Map<String, dynamic> json) {
+  PageableMovieResponse({this.page, this.movies, this.totalPages, this.totalResults});
+
+  PageableMovieResponse.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       movies = <Movie>[];
       json['results'].forEach((v) {
-        movies!.add(Movie.fromJson(v));
+        movies!.add(new Movie.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
