@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/view/screens/home_page.dart';
-import 'package:movie_app/core/view/screens/search_page.dart';
+import 'package:movie_app/core/view/screens/discover_page.dart';
 
-const List<Widget> _kScreens = [HomePage(), SearchPage()];
+const List<Widget> _kScreens = [HomePage(), DiscoverPage()];
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -41,7 +41,7 @@ class _AppState extends State<App> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: "Search",
+            label: "Discover",
           ),
         ],
       ),
