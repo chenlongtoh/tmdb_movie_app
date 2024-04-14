@@ -22,7 +22,10 @@ class CachedMovieImage extends StatelessWidget {
         aspectRatio: _aspectRatio,
         child: const Center(child: CircularProgressIndicator()),
       ),
-      errorWidget: (_, __, ___) => const Icon(Icons.error),
+      errorWidget: (_, __, ___) => AspectRatio(
+        aspectRatio: _aspectRatio,
+        child: const Icon(Icons.error),
+      ),
     );
   }
 }
