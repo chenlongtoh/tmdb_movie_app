@@ -30,10 +30,12 @@ class SelectionChip extends StatelessWidget {
           ),
           color: isActive ? _activeColor : _inactiveColor,
         ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          maxLines: 1,
+        child: Center(
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+          ),
         ),
       ),
     );
