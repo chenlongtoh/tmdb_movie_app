@@ -47,19 +47,22 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
           )
         : GestureDetector(
             onTap: _playVideo,
-            child: Stack(
-              children: [
-                CachedMovieImage.backdrop(
-                  imagePath: widget.movie.backdropPath!,
-                ),
-                const Center(
-                  child: Icon(
-                    Icons.play_circle_outline_outlined,
-                    color: Colors.white70,
-                    size: 60,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Stack(
+                children: [
+                  CachedMovieImage.backdrop(
+                    imagePath: widget.movie.backdropPath!,
                   ),
-                ),
-              ],
+                  const Center(
+                    child: Icon(
+                      Icons.play_circle_outline_outlined,
+                      color: Colors.white70,
+                      size: 60,
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
   }
