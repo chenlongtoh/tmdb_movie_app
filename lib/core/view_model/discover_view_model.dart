@@ -27,6 +27,7 @@ class DiscoverViewModel extends ChangeNotifier {
       await fetchMoviesByGenre(genre);
       setLoadState(LoadState.completed);
     }
+    notifyListeners();
   }
 
   List<Movie> getMovies() => genreMovieCache[selectedGenre]?.movies ?? [];
