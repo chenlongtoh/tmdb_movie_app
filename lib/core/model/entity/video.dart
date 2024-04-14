@@ -1,41 +1,39 @@
-class Video {
-  String? iso6391;
-  String? iso31661;
-  String? name;
+import 'package:hive/hive.dart';
+part 'video.g.dart';
+
+@HiveType(typeId: 2)
+class Video extends HiveObject {
+  @HiveField(1)
   String? key;
+
+  @HiveField(2)
   String? site;
-  int? size;
+
+  @HiveField(3)
   String? type;
-  bool? official;
-  String? publishedAt;
+
+  @HiveField(4)
   String? id;
 
-  Video({this.iso6391, this.iso31661, this.name, this.key, this.site, this.size, this.type, this.official, this.publishedAt, this.id});
+  Video({
+    this.key,
+    this.site,
+    this.type,
+    this.id,
+  });
 
   Video.fromJson(Map<String, dynamic> json) {
-    iso6391 = json['iso_639_1'];
-    iso31661 = json['iso_3166_1'];
-    name = json['name'];
     key = json['key'];
     site = json['site'];
-    size = json['size'];
     type = json['type'];
-    official = json['official'];
-    publishedAt = json['published_at'];
     id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['iso_639_1'] = iso6391;
-    data['iso_3166_1'] = iso31661;
-    data['name'] = name;
     data['key'] = key;
     data['site'] = site;
-    data['size'] = size;
     data['type'] = type;
-    data['official'] = official;
-    data['published_at'] = publishedAt;
     data['id'] = id;
     return data;
   }

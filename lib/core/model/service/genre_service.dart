@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/model/entity/genre.dart';
+import 'package:movie_app/hive/hive_manager.dart';
 import 'package:movie_app/http/http_service.dart';
 
 const _kGenreApiCollection = "/genre";
@@ -16,6 +17,9 @@ class GenreService {
         });
       }
 
+      for (Genre genre in genres) {
+        HiveManager().genreBox.put(genre.id, genre);
+      }
       return genres;
     } on DioException catch (e) {
       //TODO: Handle exception gracefully

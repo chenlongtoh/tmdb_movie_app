@@ -1,31 +1,52 @@
 import 'package:movie_app/core/model/entity/video.dart';
+import 'package:hive/hive.dart';
+part 'movie.g.dart';
 
-class Movie {
-  bool? adult;
+@HiveType(typeId: 1)
+class Movie extends HiveObject {
+  @HiveField(0)
   String? backdropPath;
+
+  @HiveField(1)
   List<int>? genreIds;
+
+  @HiveField(2)
   int? id;
-  String? originalLanguage;
-  String? originalTitle;
+
+  @HiveField(3)
   String? overview;
+
+  @HiveField(4)
   double? popularity;
+
+  @HiveField(5)
   String? posterPath;
+
+  @HiveField(6)
   String? releaseDate;
+
+  @HiveField(7)
   String? title;
+
+  @HiveField(8)
   bool? video;
+
+  @HiveField(9)
   double? voteAverage;
+
+  @HiveField(10)
   int? voteCount;
 
+  @HiveField(11)
   List<Video>? trailers;
+
+  @HiveField(12)
   List<Video>? teasers;
 
   Movie({
-    this.adult,
     this.backdropPath,
     this.genreIds,
     this.id,
-    this.originalLanguage,
-    this.originalTitle,
     this.overview,
     this.popularity,
     this.posterPath,
@@ -37,12 +58,9 @@ class Movie {
   });
 
   Movie.fromJson(Map<String, dynamic> json) {
-    adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
     id = json['id'];
-    originalLanguage = json['original_language'];
-    originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
     posterPath = json['poster_path'];
@@ -55,12 +73,9 @@ class Movie {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['adult'] = adult;
     data['backdrop_path'] = backdropPath;
     data['genre_ids'] = genreIds;
     data['id'] = id;
-    data['original_language'] = originalLanguage;
-    data['original_title'] = originalTitle;
     data['overview'] = overview;
     data['popularity'] = popularity;
     data['poster_path'] = posterPath;

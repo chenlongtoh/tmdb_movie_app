@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/core/view_model/search_model.dart';
+import 'package:movie_app/hive/hive_manager.dart';
 import 'package:movie_app/http/http_service.dart';
 import 'package:movie_app/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   HttpService.configure();
+  await HiveManager().init();
   runApp(const MyApp());
 }
 

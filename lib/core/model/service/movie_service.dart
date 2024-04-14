@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/core/constant/enum.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/entity/video.dart';
+import 'package:movie_app/hive/hive_manager.dart';
 import 'package:movie_app/http/http_service.dart';
 
 const _kMovieApiCollection = "/movie";
@@ -31,6 +32,9 @@ class MovieService {
           movie.teasers = videos.where((video) => video.type == "Teaser").toList();
         });
       }
+      for (Movie movie in movies) {
+        HiveManager().movieBox.put(movie.id, movie);
+      }
       return movies;
     } on DioException catch (e) {
       //TODO: Handle exception gracefully
@@ -52,6 +56,9 @@ class MovieService {
         results.forEach((v) {
           videos.add(Video.fromJson(v));
         });
+      }
+      for (Video video in videos) {
+        HiveManager().videoBox.put(video.id, video);
       }
       return videos;
     } on DioException catch (e) {
