@@ -30,6 +30,14 @@ class DiscoverList extends StatelessWidget {
         if (_model.genreList.isEmpty) return const Center(child: Text("No Movies Found"));
         return Column(
           children: [
+            const Padding(
+              padding: contentPadding,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Discover by category:"),
+              ),
+            ),
+            verticalSpacer15,
             SizedBox(
               height: 30,
               child: ListView.separated(
@@ -53,6 +61,7 @@ class DiscoverList extends StatelessWidget {
                 child: _model.loadState == LoadState.loadingMovie
                     ? const CircularProgressIndicator()
                     : PagingScrollingList<Movie>(
+                        key: ValueKey<int>(_model.selectedGenre?.id ?? 0),
                         initialItem: _model.getMovies(),
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, item) {
