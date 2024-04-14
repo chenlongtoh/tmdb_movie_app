@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:movie_app/core/constant/enum.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/service/movie_service.dart';
+import 'package:movie_app/core/view/widget/trailer_player.dart';
 import 'package:movie_app/shared_widgets/ui_lib/cached_movie_image.dart';
 import 'package:movie_app/shared_widgets/ui_lib/movie_tile.dart';
 
@@ -28,7 +29,7 @@ class _TrailerPreviewCarouselState extends State<TrailerPreviewCarousel> with Ti
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final moviesWithTrailer = await MovieService.fetchMovieFromLineup(lineup: widget.lineup, fetchTrailer: true);
       setState(() {
-        _children = moviesWithTrailer.map((movie) => CachedMovieImage.backdrop(imagePath: movie.backdropPath!)).toList();
+        _children = moviesWithTrailer.map((movie) => TrailerPlayer(movie: movie)).toList();
         _movies = moviesWithTrailer;
         isLoading = false;
       });
