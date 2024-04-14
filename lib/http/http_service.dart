@@ -21,11 +21,11 @@ class HttpService {
         HttpHeaders.authorizationHeader: 'Bearer $apiKey',
         HttpHeaders.acceptHeader: 'application/js',
       };
-    http.interceptors.add(
-      LogInterceptor(
-        logPrint: (o) => debugPrint(o.toString()),
-      ),
-    );
+    // http.interceptors.add(
+    //   LogInterceptor(
+    //     logPrint: (o) => debugPrint(o.toString()),
+    //   ),
+    // );
     http.transformer = BackgroundTransformer();
   }
 }
