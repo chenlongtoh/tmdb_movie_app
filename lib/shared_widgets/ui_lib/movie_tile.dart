@@ -19,45 +19,43 @@ class MovieTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        height: height,
-        padding: padding,
-        child: Row(
-          children: [
-            //TODO: Remove this and change main display tile
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: CachedMovieImage.poster(
-                key: ValueKey<int?>(movie.id),
-                imagePath: movie.posterPath ?? "",
-              ),
+    return Container(
+      height: height,
+      padding: padding,
+      child: Row(
+        children: [
+          //TODO: Remove this and change main display tile
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: CachedMovieImage.poster(
+              key: ValueKey<int?>(movie.id),
+              imagePath: movie.posterPath ?? "",
             ),
-            horizontalSpacer10,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  verticalSpacer5,
-                  Text(
-                    movie.originalTitle ?? "N/A",
-                    maxLines: 2,
-                    style: MovieAppTextStyle.bold14,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  verticalSpacer10,
-                  Text(
-                    movie.overview ?? "N/A",
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    style: MovieAppTextStyle.regular10,
-                  ),
-                ],
-              ),
+          ),
+          horizontalSpacer10,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                verticalSpacer5,
+                Text(
+                  movie.title ?? "N/A",
+                  maxLines: 2,
+                  style: MovieAppTextStyle.bold14,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                verticalSpacer10,
+                Text(
+                  movie.overview ?? "N/A",
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                  style: MovieAppTextStyle.regular10,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
