@@ -4,8 +4,7 @@ import 'package:movie_app/core/constant/enum.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/service/movie_service.dart';
 import 'package:movie_app/shared_widgets/ui_lib/cached_movie_image.dart';
-import 'package:movie_app/shared_widgets/ui_lib/spacer.dart';
-import 'package:movie_app/theme/text_style.dart';
+import 'package:movie_app/shared_widgets/ui_lib/movie_tile.dart';
 
 const double _kDefaultAspectRatio = 16 / 9;
 
@@ -72,43 +71,10 @@ class _TrailerPreviewCarouselState extends State<TrailerPreviewCarousel> with Ti
           onPageChanged: _onCarouselPageChanged,
         ),
       ),
-      Container(
+      MovieTile(
+        movie: movie,
         height: 150,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Row(
-          children: [
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: CachedMovieImage.poster(
-                key: ValueKey(movie.posterPath),
-                imagePath: movie.posterPath!,
-              ),
-            ),
-            horizontalSpacer10,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  verticalSpacer5,
-                  Text(
-                    movie.originalTitle ?? "N/A",
-                    maxLines: 2,
-                    style: MovieAppTextStyle.bold14,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  verticalSpacer10,
-                  Text(
-                    movie.overview ?? "N/A",
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    style: MovieAppTextStyle.regular10,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
       ),
     ];
   }

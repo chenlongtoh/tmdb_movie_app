@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
   Widget _buildHorizontalLineupGallery(BuildContext context, {required MovieLineup lineup}) {
     return Container(
       height: 200,
-      padding: _kContentHorizontalPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,10 +37,17 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const TrailerPreviewCarousel(lineup: MovieLineup.nowPlaying),
-            verticalSpacer15,
-            _buildHorizontalLineupGallery(context, lineup: MovieLineup.popular),
-            _buildHorizontalLineupGallery(context, lineup: MovieLineup.topRated),
-            _buildHorizontalLineupGallery(context, lineup: MovieLineup.upcoming),
+            Padding(
+              padding: _kContentHorizontalPadding,
+              child: Column(
+                children: [
+                  verticalSpacer15,
+                  _buildHorizontalLineupGallery(context, lineup: MovieLineup.popular),
+                  _buildHorizontalLineupGallery(context, lineup: MovieLineup.topRated),
+                  _buildHorizontalLineupGallery(context, lineup: MovieLineup.upcoming),
+                ],
+              ),
+            ),
           ],
         ),
       ),

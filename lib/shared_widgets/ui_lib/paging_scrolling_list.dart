@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/shared_widgets/ui_lib/spacer.dart';
 
 typedef ItemBuilder<T> = Widget Function(BuildContext context, T item);
@@ -10,6 +9,7 @@ class PagingScrollingList<T> extends StatefulWidget {
   final Axis scrollDirection;
   final ItemBuilder<T> itemBuilder;
   final FetchCallback<T> fetchCallback;
+  final EdgeInsetsGeometry padding;
 
   const PagingScrollingList({
     super.key,
@@ -17,6 +17,7 @@ class PagingScrollingList<T> extends StatefulWidget {
     required this.initialItem,
     required this.itemBuilder,
     required this.fetchCallback,
+    this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
   });
 
   @override
@@ -55,6 +56,7 @@ class _PagingScrollingListState<T> extends State<PagingScrollingList<T>> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: widget.padding,
       addAutomaticKeepAlives: true,
       controller: scrollController,
       physics: const BouncingScrollPhysics(),
