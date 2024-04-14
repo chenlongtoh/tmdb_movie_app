@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:movie_app/core/constant/enum.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/entity/genre.dart';
 import 'package:movie_app/core/model/entity/video.dart';
@@ -9,6 +10,7 @@ class HiveManager {
   factory HiveManager() => _singleton;
   HiveManager._internal();
 
+  late Box<List<int>> lineupMovieIdMapBox;
   late Box<Movie> movieBox;
   late Box<Video> videoBox;
   late Box<Genre> genreBox;
@@ -28,6 +30,7 @@ class HiveManager {
   }
 
   Future<void> openBoxes() async {
+    lineupMovieIdMapBox = await Hive.openBox<List<int>>('lineupMovieIdMapBox');
     movieBox = await Hive.openBox<Movie>('movies');
     videoBox = await Hive.openBox<Video>('videos');
     genreBox = await Hive.openBox<Genre>('genres');

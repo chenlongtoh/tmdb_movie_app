@@ -50,7 +50,8 @@ class DiscoverViewModel extends ChangeNotifier {
   //TODO: Add persistence & load
   Future<List<Movie>> fetchMoviesByGenre(Genre genre) async {
     int page = 1;
-    if (genreMovieCache[genre] != null) {
+    if (genreMovieCache[genre] != null && genreMovieCache[genre]!.totalPages != null) {
+      if (page == genreMovieCache[genre]!.totalPages) return [];
       page = genreMovieCache[genre]!.page! + 1;
     }
     final response = await DiscoverService.discoverMoviesByGenre(page: page, genre_id: genre.id!);

@@ -3,6 +3,7 @@ import 'package:movie_app/core/app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/core/view_model/search_model.dart';
 import 'package:movie_app/hive/hive_manager.dart';
+import 'package:movie_app/http/connectivity_observer.dart';
 import 'package:movie_app/http/http_service.dart';
 import 'package:movie_app/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ void main() async {
   await dotenv.load(fileName: ".env");
   HttpService.configure();
   await HiveManager().init();
+  await ConnectivityObserver().init();
   runApp(const MyApp());
 }
 

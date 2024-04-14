@@ -3,6 +3,7 @@ import 'package:movie_app/core/constant/enum.dart';
 import 'package:movie_app/core/model/entity/movie.dart';
 import 'package:movie_app/core/model/entity/video.dart';
 import 'package:movie_app/hive/hive_manager.dart';
+import 'package:movie_app/http/connectivity_observer.dart';
 import 'package:movie_app/http/http_service.dart';
 
 const _kMovieApiCollection = "/movie";
@@ -10,6 +11,11 @@ const _kMovieApiCollection = "/movie";
 class MovieService {
   static Future<List<Movie>> fetchMovieFromLineup({int page = 1, required MovieLineup lineup, bool fetchTrailer = false}) async {
     try {
+      if (!ConnectivityObserver().connected) {
+        final idList = HiveManager().lineupMovieIdMapBox.get(lineup.name);
+        return idList?.map((id) => HiveManager().movieBox.get(id)).whereType<Movie>().toList() ?? [];
+      }
+
       final response = await HttpService.http.get(
         '$_kMovieApiCollection/${lineup.apiResourcePath}',
         queryParameters: {
@@ -17,6 +23,7 @@ class MovieService {
           "language": "en-US",
         },
       );
+
       final results = response.data['results'];
       final movies = <Movie>[];
       if (results != null) {
@@ -35,6 +42,7 @@ class MovieService {
       for (Movie movie in movies) {
         HiveManager().movieBox.put(movie.id, movie);
       }
+      HiveManager().lineupMovieIdMapBox.put(lineup.name, movies.map<int>((movie) => movie.id!).toList());
       return movies;
     } on DioException catch (e) {
       //TODO: Handle exception gracefully

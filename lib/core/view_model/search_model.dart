@@ -29,8 +29,8 @@ class SearchModel extends ChangeNotifier {
       searchHistory.remove(title);
     }
     searchHistory.addFirst(title);
-    final response = await SearchService.searchMoviesByKeyword(title: title);
-    searchResult = response?.movies ?? [];
+    final movies = await SearchService.searchMoviesByKeyword(title: title);
+    searchResult = movies ?? [];
     setSearching(false);
   }
 }
